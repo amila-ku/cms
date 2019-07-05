@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS PAGES(
     content TEXT NOT NULL
 );
 
+--- create table posts ---
 CREATE TABLE IF NOT EXISTS POSTS(
     id              SERIAL PRIMARY KEY,
     title           TEXT NOT NULL,
@@ -21,6 +22,7 @@ CREATE TABLE IF NOT EXISTS POSTS(
     created_date    DATE NOT NULL
 );
 
+--- create table comments
 CREATE TABLE IF NOT EXISTS COMMENTS(
     id              SERIAL PRIMARY KEY,
     author          TEXT NOT NULL,
