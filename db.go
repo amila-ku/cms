@@ -46,3 +46,26 @@ func CreatePage(p Page) (int, error) {
 	err := newDB().DB.QueryRow("INSERT INTO PAGES(title,content) values($1,$2) RETURNING id", p.Title, p.Content).Scan(&id)
 	return id, err
 }
+
+//GetPage returns pages
+func GetPage() ([]Page, error) {
+	rows, err := newDB().DB.Query("SELECT * FROM PAGES")
+	if err != nil {
+		return nil, err
+	}
+
+	defer rows.Close()
+
+	pages := []Page{}
+
+	for rows.Next() {
+		var p Page
+		err := rows.Scan(p.ID, p.Title, p.Content)
+		if err != nil {
+			return nil, err
+		}
+		pages = append(pages, p)
+	}
+
+	return pages, nil
+}

@@ -41,7 +41,7 @@ func HandleIndex(w http.ResponseWriter, r *http.Request) {
 		},
 	}
 
-	Tmpl.ExecuteTemplate(w, "page", page)
+	Tmpl.ExecuteTemplate(w, "index", page)
 
 }
 
@@ -64,10 +64,17 @@ func HandleNew(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		if contentType == "page" {
-			Tmpl.ExecuteTemplate(w, "page", Page{
+			page := Page{
 				Title:   title,
 				Content: content,
-			})
+			}
+			Tmpl.ExecuteTemplate(w, "page", page)
+
+			_, err := CreatePage(page)
+			if err != nil {
+				http.Error(w, err.Error(), http.StatusInternalServerError)
+				return
+			}
 			return
 		}
 
