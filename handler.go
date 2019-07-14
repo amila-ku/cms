@@ -108,11 +108,16 @@ func HandlePage(w http.ResponseWriter, r *http.Request) {
 	path := strings.TrimLeft(r.URL.Path, "page")
 
 	if path == "" {
-		http.NotFound(w, r)
+		pages, err := GetPage()
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		Tmpl.ExecuteTemplate(w, "page", pages)
 		return
 	}
 
-	page := Post{
+	page := Page{
 		Title:   "New Page with contetn",
 		Content: "Just another post nw post from Dortmund",
 	}
