@@ -14,7 +14,7 @@ func HelloServer(w http.ResponseWriter, r *http.Request) {
 
 //ServeIndex serves index page
 func HandleIndex(w http.ResponseWriter, r *http.Request) {
-	page := Page{
+	index := Page{
 		Title:   "Hello Web",
 		Content: "Web Page with go templates being shown",
 		Posts: []Post{
@@ -41,7 +41,7 @@ func HandleIndex(w http.ResponseWriter, r *http.Request) {
 		},
 	}
 
-	Tmpl.ExecuteTemplate(w, "index", page)
+	Tmpl.ExecuteTemplate(w, "index", index)
 
 }
 

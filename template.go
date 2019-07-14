@@ -9,6 +9,15 @@ import (
 var Tmpl = template.Must(template.ParseGlob("../templates/*"))
 
 //Page struct defines the structure of a page
+type Index struct {
+	ID      int
+	Title   string
+	Content string
+	Pages	[]Page
+	Posts   []Post
+}
+
+//Page struct defines the structure of a page
 type Page struct {
 	ID      int
 	Title   string

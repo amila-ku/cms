@@ -3,7 +3,7 @@ package main
 import (
 	"net/http"
 
-	"github.com/cms"
+	"github.com/amila-ku/cms"
 )
 
 func main() {
